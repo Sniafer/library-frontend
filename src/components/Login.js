@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "./quaries";
+import { Button, TextInput } from "@mantine/core";
 
 const Login = ({ setToken, token, show, setPage }) => {
   const [username, setUsername] = useState("");
@@ -39,21 +40,25 @@ const Login = ({ setToken, token, show, setPage }) => {
       {!token ? (
         <form onSubmit={submit}>
           <div>
-            username{" "}
-            <input
+            <TextInput
+              label="Username"
+              required
               value={username}
               onChange={({ target }) => setUsername(target.value)}
             />
           </div>
           <div>
-            password{" "}
-            <input
+            <TextInput
+              label="Password"
+              required
               type="password"
               value={password}
               onChange={({ target }) => setPassword(target.value)}
             />
           </div>
-          <button type="submit">login</button>
+          <Button color="cyan" style={{ marginTop: "1rem" }} type="submit">
+            Login
+          </Button>
         </form>
       ) : (
         <h3>Logged-in</h3>

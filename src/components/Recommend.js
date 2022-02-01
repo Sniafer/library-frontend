@@ -1,4 +1,5 @@
 import { useLazyQuery } from "@apollo/client";
+import { Group, Paper, Text, Title } from "@mantine/core";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -26,32 +27,64 @@ const Recommend = ({ show, user }) => {
 
   if (result.loading) return "Loading...";
 
-  return (
-    <div>
-      <h2>recommendations</h2>
-      {user.favoriteGenre && (
-        <p>
-          books in your favorite genre <span>{user.favoriteGenre}</span>
-        </p>
-      )}
-      <table>
-        <tbody>
-          <tr>
-            <th></th>
-            <th>author</th>
-            <th>published</th>
-          </tr>
-          {books.map((a) => (
-            <tr key={a.title}>
-              <td>{a.title}</td>
-              <td>{a.author.name}</td>
-              <td>{a.published}</td>
+  if (user)
+    return (
+      <div>
+        <Title order={1}>Recommendations</Title>
+        {user.favoriteGenre && (
+          <Text>
+            books in your favorite genre{" "}
+            <span style={{ fontWeight: "bold" }}>{user.favoriteGenre}</span>
+          </Text>
+        )}
+        {/* <table>
+          <tbody>
+            <tr>
+              <th></th>
+              <th>author</th>
+              <th>published</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+            {books.map((a) => (
+              <tr key={a.title}>
+                <td>{a.title}</td>
+                <td>{a.author.name}</td>
+                <td>{a.published}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table> */}
+        {books.map((a) => (
+          <Paper
+            padding="md"
+            shadow="xs"
+            withBorder
+            style={{ marginTop: "1rem" }}
+            key={a.name}
+          >
+            <Group grow spacing="xl">
+              <Group direction="column">
+                <Text color="Gray" size="xs">
+                  Title:
+                </Text>
+                <Text size="xl">{a.title}</Text>
+              </Group>
+              <Group direction="column">
+                <Text color="Gray" size="xs">
+                  Author:
+                </Text>
+                <Text size="xl">{a.author.name}</Text>
+              </Group>
+              <Group direction="column">
+                <Text color="Gray" size="xs">
+                  Published:
+                </Text>
+                <Text size="xl">{a.published}</Text>
+              </Group>
+            </Group>
+          </Paper>
+        ))}
+      </div>
+    );
 };
 
 export default Recommend;

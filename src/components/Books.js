@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { ALL_BOOKS } from "./quaries";
 import { useState } from "react";
+import { Button, Group, Paper, Text, Title } from "@mantine/core";
 
 const Books = (props) => {
   const [currentGenre, setCurrentGenre] = useState("all genres");
@@ -26,11 +27,11 @@ const Books = (props) => {
 
   return (
     <div>
-      <h2>books</h2>
-      <p>
+      <Title order={1}>Books</Title>
+      <Text>
         in genre <span style={{ fontWeight: "bold" }}>{currentGenre}</span>
-      </p>
-      <table>
+      </Text>
+      {/* <table>
         <tbody>
           <tr>
             <th></th>
@@ -53,15 +54,84 @@ const Books = (props) => {
                 </tr>
               ))}
         </tbody>
-      </table>
-      <div>
-        <h3>genres</h3>
+      </table> */}
+      {currentGenre === "all genres"
+        ? books.map((a) => (
+            <Paper
+              padding="md"
+              shadow="xs"
+              withBorder
+              style={{ marginTop: "1rem" }}
+              key={a.title}
+            >
+              <Group grow spacing="xl">
+                <Group direction="column">
+                  <Text color="Gray" size="xs">
+                    Title:
+                  </Text>
+                  <Text size="xl">{a.title}</Text>
+                </Group>
+                <Group direction="column">
+                  <Text color="Gray" size="xs">
+                    Author:
+                  </Text>
+                  <Text size="xl">{a.author.name}</Text>
+                </Group>
+                <Group direction="column">
+                  <Text color="Gray" size="xs">
+                    Published:
+                  </Text>
+                  <Text size="xl">{a.published}</Text>
+                </Group>
+              </Group>
+            </Paper>
+          ))
+        : filteredBooks.map((a) => (
+            <Paper
+              padding="md"
+              shadow="xs"
+              withBorder
+              style={{ marginTop: "1rem" }}
+              key={a.title}
+            >
+              <Group grow spacing="xl">
+                <Group direction="column">
+                  <Text color="Gray" size="xs">
+                    Title:
+                  </Text>
+                  <Text size="xl">{a.title}</Text>
+                </Group>
+                <Group direction="column">
+                  <Text color="Gray" size="xs">
+                    Author:
+                  </Text>
+                  <Text size="xl">{a.author.name}</Text>
+                </Group>
+                <Group direction="column">
+                  <Text color="Gray" size="xs">
+                    Published:
+                  </Text>
+                  <Text size="xl">{a.published}</Text>
+                </Group>
+              </Group>
+            </Paper>
+          ))}
+      <div style={{ margin: "3rem 0" }}>
+        <Title style={{ marginBottom: "1rem" }} order={2}>
+          Genres
+        </Title>
         {unique.map((genre) => (
-          <button key={genre} onClick={() => setCurrentGenre(genre)}>
+          <Button
+            style={{ marginRight: "1rem" }}
+            key={genre}
+            onClick={() => setCurrentGenre(genre)}
+          >
             {genre}
-          </button>
+          </Button>
         ))}
-        <button onClick={() => setCurrentGenre("all genres")}>all</button>
+        <Button color="teal" onClick={() => setCurrentGenre("all genres")}>
+          all
+        </Button>
       </div>
     </div>
   );

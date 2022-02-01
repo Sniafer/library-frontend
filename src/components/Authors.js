@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { ALL_AUTHORS, UPDATE_AUTHOR } from "./quaries";
+import {
+  Button,
+  Group,
+  Input,
+  Paper,
+  Select,
+  Text,
+  Title,
+} from "@mantine/core";
 
 const Authors = (props) => {
   const [born, setBorn] = useState("");
@@ -34,49 +43,65 @@ const Authors = (props) => {
     setBorn("");
   };
 
+  const selectData = authors.map((author) => {
+    return { value: author.name, label: author.name };
+  });
+
   return (
     <div>
-      <h2>authors</h2>
-      <table>
-        <tbody>
-          <tr>
-            <th></th>
-            <th>born</th>
-            <th>books</th>
-          </tr>
-          {authors.map((a) => (
-            <tr key={a.name}>
-              <td>{a.name}</td>
-              <td>{a.born}</td>
-              <td>{a.bookCount}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Title order={1}>Authors</Title>
+      <div>
+        {authors.map((a) => (
+          <Paper
+            padding="md"
+            shadow="xs"
+            withBorder
+            style={{ marginTop: "1rem" }}
+            key={a.name}
+          >
+            <Group grow spacing="xl">
+              <Group direction="column">
+                <Text color="Gray" size="xs">
+                  Name:
+                </Text>
+                <Text size="xl">{a.name}</Text>
+              </Group>
+              <Group direction="column">
+                <Text color="Gray" size="xs">
+                  Born:
+                </Text>
+                <Text size="xl">{a.born}</Text>
+              </Group>
+              <Group direction="column">
+                <Text color="Gray" size="xs">
+                  Books:
+                </Text>
+                <Text size="xl">{a.bookCount}</Text>
+              </Group>
+            </Group>
+          </Paper>
+        ))}
+      </div>
       {props.token && (
-        <div>
-          <h2>set birthyear</h2>
-          <form onSubmit={submit}>
-            <select
-              defaultValue="default"
-              name="name"
-              onChange={({ target }) => setName(target.value)}
-            >
-              <option value="default" disabled hidden>
-                Select...
-              </option>
-              {authors.map((author) => (
-                <option key={author.name} value={author.name}>
-                  {author.name}
-                </option>
-              ))}
-            </select>
-            <input
-              name="born"
-              type="number"
-              onChange={({ target }) => setBorn(target.value)}
-            />
-            <button>update author</button>
+        <div style={{ marginTop: "3rem", marginBottom: "3rem" }}>
+          <Title order={2}>Set birthyear</Title>
+          <form style={{ marginTop: "1rem" }} onSubmit={submit}>
+            <Group>
+              <Select
+                placeholder="Select..."
+                onChange={setName}
+                data={selectData}
+              />
+              <Input
+                name="born"
+                placeholder="Birth date"
+                type="number"
+                onChange={({ target }) => setBorn(target.value)}
+              />
+              <Button type="submit" color="teal" style={{ marginLeft: "1rem" }}>
+                Update author
+              </Button>
+            </Group>
           </form>
         </div>
       )}

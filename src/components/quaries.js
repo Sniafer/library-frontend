@@ -16,7 +16,6 @@ const BOOK_DETAILS = gql`
     genres
     author {
       name
-      born
     }
     published
   }
@@ -85,6 +84,16 @@ export const ADD_BOOK = gql`
       id
     }
   }
+`;
+
+export const BOOK_ADDED = gql`
+  subscription {
+    bookAdded {
+      ...BookDetails
+    }
+  }
+
+  ${BOOK_DETAILS}
 `;
 
 export const UPDATE_AUTHOR = gql`
