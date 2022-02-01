@@ -38,9 +38,6 @@ const Authors = (props) => {
     updateAuthor({
       variables: { name, born: bornToInt },
     });
-
-    setName("");
-    setBorn("");
   };
 
   const selectData = authors.map((author) => {

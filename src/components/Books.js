@@ -31,30 +31,6 @@ const Books = (props) => {
       <Text>
         in genre <span style={{ fontWeight: "bold" }}>{currentGenre}</span>
       </Text>
-      {/* <table>
-        <tbody>
-          <tr>
-            <th></th>
-            <th>author</th>
-            <th>published</th>
-          </tr>
-          {currentGenre === "all genres"
-            ? books.map((a) => (
-                <tr key={a.title}>
-                  <td>{a.title}</td>
-                  <td>{a.author.name}</td>
-                  <td>{a.published}</td>
-                </tr>
-              ))
-            : filteredBooks.map((a) => (
-                <tr key={a.title}>
-                  <td>{a.title}</td>
-                  <td>{a.author.name}</td>
-                  <td>{a.published}</td>
-                </tr>
-              ))}
-        </tbody>
-      </table> */}
       {currentGenre === "all genres"
         ? books.map((a) => (
             <Paper

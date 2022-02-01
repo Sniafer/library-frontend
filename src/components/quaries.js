@@ -21,20 +21,6 @@ const BOOK_DETAILS = gql`
   }
 `;
 
-// export const ALL_BOOKS = gql`
-//   query {
-//     allBooks {
-//       title
-//       genres
-//       author {
-//         name
-//         born
-//       }
-//       published
-//     }
-//   }
-// `;
-
 export const ALL_BOOKS = gql`
   {
     allBooks {

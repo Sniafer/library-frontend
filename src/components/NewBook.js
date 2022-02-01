@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { ADD_BOOK, ALL_AUTHORS, ALL_BOOKS, BOOKS_BY_GENRE } from "./quaries";
-import { Button, Container, Text, TextInput } from "@mantine/core";
+import { Button, Text, TextInput } from "@mantine/core";
 
 const NewBook = ({ show, user, updateCacheWith }) => {
   const [title, setTitle] = useState("");
